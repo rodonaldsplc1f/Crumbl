@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>order.raisingcanes</title>
+    <link rel="icon" href="_icons/icon-192x1925047.png" type="image/png" />
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        background: url("_icons/icon-192x1925047.png") no-repeat center center;
+        background-size: cover;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+      }
+      header img {
+        width: 300px; /* Increased size */
+        height: auto;
+      }
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+      }
+      .search-bar {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+      }
+      .search-bar input {
+        width: 100%;
+        max-width: 400px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .filter {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+      }
+      .filter select {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .products {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+      }
+      .product {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      .product img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+      .product h3 {
+        margin: 10px 0;
+        font-size: 18px;
+      }
+      .product p {
+        margin: 5px 0;
+        font-size: 16px;
+        color: #6db32e;
+      }
+      .product button {
+        background-color: #6db32e;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+      }
+      .product button:hover {
+        background-color: #5a9d1c;
+      }
+      .cart {
+        position: fixed;
+        bottom: 20px; /* Move the cart to the bottom */
+        right: 20px;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        max-height: 80vh;
+        overflow-y: auto;
+        transition: box-shadow 0.3s;
+      }
+      .cart h2 {
+        margin: 0 0 10px;
+        font-size: 20px;
+        color: #333;
+      }
+      .cart-items {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .cart-items li {
+        border-bottom: 1px solid #ddd;
+        padding: 10px 0;
+        font-size: 16px;
+      }
+      .checkout-button {
+        background-color: #6db32e;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+        transition: background-color 0.3s;
+      }
+      .checkout-button:hover {
+        background-color: #5a9d1c;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img src="_icons/icon-192x1925047.png" alt="canes Logo" />
+    </header>
+
+    <div class="container">
+      <div class="search-bar">
+        <input type="text" id="search" placeholder="Search for items..." />
+      </div>
+      <div class="filter">
+        <select id="category">
+          <option value="all">All</option>
+          <option value="food">Food</option>
+          <option value="drinks">Drinks</option>
+          <option value="extra">Extra</option>
+        </select>
+      </div>
+      <div class="products" id="products">
+        <div class="product">
+          <img src="Images/Webp111 (119).png" alt="e" />
+          <h3>Caniac Combo</h3>
+          <p>£5.25</p>
+          <button onclick="addToCart(1)">Add to Cart</button>
+        </div>
+        <div class="product">
+          <img
+            src="https://images.prismic.io/raisingcanes/NjcwNWUzYzctNzM5My00MmFkLWI1N2EtM2FiZThiYjdiMDA1_363886a1-6d76-4abd-99eb-9e6609c0c247_box_combo_new.png?auto=compress%2Cformat&rect=0%2C0%2C2000%2C2000&w=128&h=128&fit=max 128w"
+            alt="e"
+          />
+          <h3>Box Combo</h3>
+          <p>£2.00</p>
+          <button onclick="addToCart(2)">Add to Cart</button>
+        </div>
+        <div class="product">
+          <img
+            src="https://images.prismic.io/raisingcanes/NjcwNWUzYzctNzM5My00MmFkLWI1N2EtM2FiZThiYjdiMDA1_363886a1-6d76-4abd-99eb-9e6609c0c247_box_combo_new.png"
+            alt="e"
+          />
+          <h3>Kids Combo</h3>
+          <p>£35.00</p>
+          <button onclick="addToCart(3)">Add to Cart</button>
+        </div>
+        <div class="product">
+          <img
+            src="https://images.prismic.io/raisingcanes/NjcwNWUzYzctNzM5My00MmFkLWI1N2EtM2FiZThiYjdiMDA1_363886a1-6d76-4abd-99eb-9e6609c0c247_box_combo_new.png"
+            alt="e"
+          />
+          <h3>Three Finger Combo</h3>
+          <p>£0.90</p>
+          <button onclick="addToCart(4)">Add to Cart</button>
+        </div>
+        <div class="product">
+          <img
+            src="https://images.prismic.io/raisingcanes/NjcwNWUzYzctNzM5My00MmFkLWI1N2EtM2FiZThiYjdiMDA1_363886a1-6d76-4abd-99eb-9e6609c0c247_box_combo_new.png"
+            alt="e"
+          />
+          <h3>Two Finger Combo</h3>
+          <p>£0.90</p>
+          <button onclick="addToCart(5)">Add to Cart</button>
+        </div>
+        <div class="product">
+          <img
+            src="https://images.prismic.io/raisingcanes/NjcwNWUzYzctNzM5My00MmFkLWI1N2EtM2FiZThiYjdiMDA1_363886a1-6d76-4abd-99eb-9e6609c0c247_box_combo_new.png"
+            alt="e"
+          />
+          <h3>Canes Sauce</h3>
+          <p>£0.90</p>
+          <button onclick="addToCart(6)">Add to Cart</button>
+        </div>
+        <div class="product">
+          <img
+            src="https://images.prismic.io/raisingcanes/NjcwNWUzYzctNzM5My00MmFkLWI1N2EtM2FiZThiYjdiMDA1_363886a1-6d76-4abd-99eb-9e6609c0c247_box_combo_new.png"
+            alt="e"
+          />
+          <h3>Texas Toast</h3>
+          <p>£0.90</p>
+          <button onclick="addToCart(7)">Add to Cart</button>
+        </div>
+        <div class="product">
+          <img
+            src="https://images.prismic.io/raisingcanes/NjcwNWUzYzctNzM5My00MmFkLWI1N2EtM2FiZThiYjdiMDA1_363886a1-6d76-4abd-99eb-9e6609c0c247_box_combo_new.png"
+            alt="e"
+          />
+          <h3>Chicken Tender</h3>
+          <p>£0.90</p>
+          <button onclick="addToCart(8)">Add to Cart</button>
+        </div>
+        <div class="product">
+          <img
+            src="https://images.prismic.io/raisingcanes/NjcwNWUzYzctNzM5My00MmFkLWI1N2EtM2FiZThiYjdiMDA1_363886a1-6d76-4abd-99eb-9e6609c0c247_box_combo_new.png"
+            alt="e"
+          />
+          <h3>Coleslaw</h3>
+          <p>£0.90</p>
+          <button onclick="addToCart(9)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="cart" id="cart">
+      <h2>Cart</h2>
+      <ul class="cart-items" id="cart-items">
+        <!-- Cart items will be dynamically added here -->
+      </ul>
+      <button class="checkout-button" onclick="checkout()">Checkout</button>
+    </div>
+
+    <script>
+      const products = [
+        {
+          id: 1,
+          name: "Caniac Combo",
+          price: 5.25,
+          category: "food",
+          image:
+            "https://images.prismic.io/raisingcanes/NjcwNWUzYzctNzM5My00MmFkLWI1N2EtM2FiZThiYjdiMDA1_363886a1-6d76-4abd-99eb-9e6609c0c247_box_combo_new.png",
+        },
+        {
+          id: 2,
+          name: "Box Combo",
+          price: 2.0,
+          category: "food",
+          image:
+            "https://images.prismic.io/raisingcanes/NjcwNWUzYzctNzM5My00MmFkLWI1N2EtM2FiZThiYjdiMDA1_363886a1-6d76-4abd-99eb-9e6609c0c247_box_combo_new.png",
+        },
+        {
+          id: 3,
+          name: "Kids Combo",
+          price: 35.0,
+          category: "food",
+          image:
+            "https://images.prismic.io/raisingcanes/NjcwNWUzYzctNzM5My00MmFkLWI1N2EtM2FiZThiYjdiMDA1_363886a1-6d76-4abd-99eb-9e6609c0c247_box_combo_new.png",
+        },
+        {
+          id: 4,
+          name: "Three Finger Combo",
+          price: 0.9,
+          category: "food",
+          image:
+            "https://images.prismic.io/raisingcanes/NjcwNWUzYzctNzM5My00MmFkLWI1N2EtM2FiZThiYjdiMDA1_363886a1-6d76-4abd-99eb-9e6609c0c247_box_combo_new.png",
+        },
+        {
+          id: 5,
+          name: "Two Finger Combo",
+          price: 5.25,
+          category: "food",
+          image:
+            "https://images.prismic.io/raisingcanes/NjcwNWUzYzctNzM5My00MmFkLWI1N2EtM2FiZThiYjdiMDA1_363886a1-6d76-4abd-99eb-9e6609c0c247_box_combo_new.png",
+        },
+        {
+          id: 6,
+          name: "Canes Sauce",
+          price: 2.0,
+          category: "extra",
+          image:
+            "https://images.prismic.io/raisingcanes/NjcwNWUzYzctNzM5My00MmFkLWI1N2EtM2FiZThiYjdiMDA1_363886a1-6d76-4abd-99eb-9e6609c0c247_box_combo_new.png",
+        },
+        {
+          id: 7,
+          name: "Texas Toast",
+          price: 35.0,
+          category: "extra",
+          image:
+            "https://images.prismic.io/raisingcanes/NjcwNWUzYzctNzM5My00MmFkLWI1N2EtM2FiZThiYjdiMDA1_363886a1-6d76-4abd-99eb-9e6609c0c247_box_combo_new.png",
+        },
+        {
+          id: 8,
+          name: "Chicken Tender",
+          price: 0.9,
+          category: "extra",
+          image:
+            "https://images.prismic.io/raisingcanes/NjcwNWUzYzctNzM5My00MmFkLWI1N2EtM2FiZThiYjdiMDA1_363886a1-6d76-4abd-99eb-9e6609c0c247_box_combo_new.png",
+        },
+        {
+          id: 9,
+          name: "Coleslaw",
+          price: 0.9,
+          category: "extra",
+          image:
+            "https://images.prismic.io/raisingcanes/NjcwNWUzYzctNzM5My00MmFkLWI1N2EtM2FiZThiYjdiMDA1_363886a1-6d76-4abd-99eb-9e6609c0c247_box_combo_new.png",
+        },
+      ];
+
+      const cart = [];
+
+      function loadProducts() {
+        const category = document.getElementById("category").value;
+        const search = document.getElementById("search").value.toLowerCase();
+        const productContainer = document.getElementById("products");
+        productContainer.innerHTML = "";
+
+        const filteredProducts = products.filter((p) => {
+          return (
+            (category === "all" || p.category === category) &&
+            p.name.toLowerCase().includes(search)
+          );
+        });
+
+        filteredProducts.forEach((product) => {
+          const productDiv = document.createElement("div");
+          productDiv.classList.add("product");
+          productDiv.innerHTML = `
+                <img src="${product.image}" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <p>£${product.price.toFixed(2)}</p>
+                <button onclick="addToCart(${product.id})">Add to Cart</button>
+            `;
+          productContainer.appendChild(productDiv);
+        });
+      }
+
+      function addToCart(productId) {
+        const product = products.find((p) => p.id === productId);
+        cart.push(product);
+        displayCart();
+      }
+
+      function displayCart() {
+        const cartItemsContainer = document.getElementById("cart-items");
+        cartItemsContainer.innerHTML = "";
+
+        cart.forEach((item) => {
+          const cartItem = document.createElement("li");
+          cartItem.textContent = `${item.name} - £${item.price.toFixed(2)}`;
+          cartItemsContainer.appendChild(cartItem);
+        });
+      }
+
+      async function checkout() {
+        const username = prompt("Enter your username:");
+        if (username) {
+          console.log(cart)
+          const orderDetails = {
+            username,
+            items: cart,
+            orderNumber: Date.now().toString(),
+          };
+          alert(
+            "Your Raising Canes Mobile Order has been placed successfully! Please check the main game for your order!"
+          );
+          
+          let bodyJson = {
+            message: JSON.stringify(orderDetails)
+          }
+            console.log("JSON BODY", bodyJson)
+          await fetch(
+            `https://apis.roblox.com/messaging-service/v1/universes/PLACEID/topics/TOPICNAME`, // Replace placeid with ur placeid and topicname with your topic name
+            {
+              method: "POST",
+              body: JSON.stringify({
+                message: JSON.stringify(orderDetails),
+              }),
+              headers: {
+                "Content-Type": "application/json",
+                "x-api-key":
+                // Import your api key here for roblox
+                  "TjyiY8BIoU+vTzSTw3Ni760bvW533niXke1VA5y2KMpwKLS6ZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNkluTnBaeTB5TURJeExUQTNMVEV6VkRFNE9qVXhPalE1V2lJc0luUjVjQ0k2SWtwWFZDSXNJbU4wZVNJNklrcFhWQ0o5LmV5SmlZWE5sUVhCcFMyVjVJam9pVkdwNWFWazRRa2x2VlN0MlZIcFRWSGN6VG1rM05qQmlkbGMxTXpOdWFWaHJaVEZXUVRWNU1rdE5jSGRMVEZNMklpd2liM2R1WlhKSlpDSTZJall4T0RnM09EZzROaUlzSW1GMVpDSTZJbEp2WW14dmVFbHVkR1Z5Ym1Gc0lpd2lhWE56SWpvaVEyeHZkV1JCZFhSb1pXNTBhV05oZEdsdmJsTmxjblpwWTJVaUxDSmxlSEFpT2pFM01qYzBNRFl4T0RBc0ltbGhkQ0k2TVRjeU56UXdNalU0TUN3aWJtSm1Jam94TnpJM05EQXlOVGd3ZlEuUmVxTk5KMzFEdE00TnBTT0lKZy1xZjRxa2hVZnNCQ09yZGx2R2Z4ajY1YXVxMmFVRU9oSmV0bmVPR0ZUOWhFYmFaTC1Lbnp0VS1CS1RFMEtnbzRKQmMyNFhUMldKVlJKQ3VVeGx1bk9qYWlsT1ZhZURZYWY4d1FPYUwwYkZmVmhSYUJDaGdnUHdjSmpQX1Q3M2k4ZW5CRWx3cUtRUGF4V040cHN1dWpEYlRkaHJUN2kyVVNxOXAzdFhaV09iZkFWc1hQNFdoSWhuNExoQlQyVEdQR083T3RMYXpaaWNQZDJWbkZBVTRZeDZCVTFvV3pPcVBFN3k0R01mNTBYRGhJdi14RDJOVk9JZUxTeEpjOHQwbXo2OEdtRWEyc1VBRkx2ZGZ4NmUyTC1LODRZdzhRSTVKZ1doVkVNUG51R2VpdGJydEVNVXRzcUpJWTBuOUk4emw5UFBB",
+              },
+            }
+          )
+            .then(async (response) => {
+              if (!response.ok) {
+                console.error(response.status, json);
+                return alert(
+                  "An error occurred when trying to send your order."
+                );
+              }
+            })
+        } else {
+          alert(
+            "Error placing your Raising Canes Mobile order. Please ensure all inputs are filled."
+          );
+        }
+        cart.length = 0;
+        displayCart();
+      }
+
+      document
+        .getElementById("category")
+        .addEventListener("change", loadProducts);
+      document.getElementById("search").addEventListener("input", loadProducts);
+
+      loadProducts();
+    </script>
+  </body>
+</html>
